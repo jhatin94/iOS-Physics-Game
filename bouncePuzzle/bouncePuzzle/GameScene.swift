@@ -51,6 +51,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             gameOver.run(actionSequence)
         }
     }
+    var ball: SKSpriteNode!
     
     // sounds
     let blipSound = SKAction.playSoundFileNamed("pongblip", waitForCompletion: false)
@@ -67,7 +68,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         physicsWorld.gravity = CGVector(dx: 0.0, dy: 0.0)
         physicsWorld.contactDelegate = self
-        let ball = childNode(withName: BallCategoryName) as! SKSpriteNode
+        ball = childNode(withName: BallCategoryName) as! SKSpriteNode
         
         // failure boundary
         let bottomRect = CGRect(x: frame.origin.x, y: frame.origin.y, width: frame.size.width, height: 1)
@@ -176,6 +177,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     override func update(_ currentTime: TimeInterval) {
         gameState.update(deltaTime: currentTime)
+        let complete = isGameWon()
+        if (complete) {
+            gameWon = true
+            gameState.enter(GameOver.self)
+        }
     }
     
     func didBegin(_ contact: SKPhysicsContact) {
@@ -206,14 +212,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 gameState.enter(GameOver.self)
                 gameWon = false
             }
-            else if (firstBody.categoryBitMask == BallCategory && secondBody.categoryBitMask == BlockCategory) {
-                breakBlock(node: secondBody.node!)
-                // check if game is won
-                if (isGameWon()) {
-                    gameState.enter(GameOver.self)
-                    gameWon = true
-                }
-            }
         }
     }
     
@@ -233,11 +231,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func isGameWon() -> Bool {
-        var numberOfBricks = 0
-        self.enumerateChildNodes(withName: BlockCategoryName) {
-            node, stop in
-            numberOfBricks += 1
-        }
-        return numberOfBricks == 0
+        return ball.position.x >= self.frame.width - ball.frame.size.width
     }
 }
