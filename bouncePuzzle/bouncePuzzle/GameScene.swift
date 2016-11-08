@@ -46,7 +46,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             let gameOver = childNode(withName: GameMessageName) as! SKSpriteNode
             let textureName = gameWon ? "YouWon" : "GameOver"
             let texture = SKTexture(imageNamed: textureName)
-            let actionSequence = SKAction.sequence([SKAction.setTexture(texture), SKAction.scale(to: 1.0, duration: 0.25)])
+            let actionSequence = SKAction.sequence([SKAction.setTexture(texture), SKAction.scale(to: 0.8, duration: 0.25)])
             run(gameWon ? gameWonSound : gameOverSound)
             gameOver.run(actionSequence)
         }
@@ -123,7 +123,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         gameMessage.name = GameMessageName
         gameMessage.position = CGPoint(x: frame.midX, y: frame.midY)
         gameMessage.zPosition = 4
-        gameMessage.setScale(0.0)
+        gameMessage.setScale(0.05)
         addChild(gameMessage)
         
         gameState.enter(WaitingForTap.self)
