@@ -102,7 +102,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         let xOffset = (frame.width - totalBlocksWidth)/2
         
-        for i in 0..<numberOfBlocks {
+        /*for i in 0..<numberOfBlocks {
             let block = SKSpriteNode(imageNamed: "block.png")
             block.position = CGPoint(x: xOffset + CGFloat(CGFloat(i) + 0.5) * blockWidth, y: frame.height * 0.8)
             
@@ -115,7 +115,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             block.physicsBody!.categoryBitMask = BlockCategory
             block.zPosition = 2
             addChild(block)
-        }
+        }*/
         
         // create launch state
         let gameMessage = SKSpriteNode(imageNamed: "TapToPlay")

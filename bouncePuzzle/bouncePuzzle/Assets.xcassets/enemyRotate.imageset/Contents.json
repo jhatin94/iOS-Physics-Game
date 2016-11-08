@@ -2,7 +2,7 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "ball.png",
+      "filename" : "enemyMove.png",
       "scale" : "1x"
     },
     {
