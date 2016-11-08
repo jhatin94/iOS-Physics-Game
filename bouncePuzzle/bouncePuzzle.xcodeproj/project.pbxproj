@@ -24,6 +24,7 @@
 		3F82FC201DD231F4009430AF /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 3F82FC1D1DD231F4009430AF /* GameScene.sks */; };
 		3F82FC211DD231F4009430AF /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F82FC1E1DD231F4009430AF /* GameScene.swift */; };
 		3F82FC241DD2322C009430AF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3F82FC231DD2322C009430AF /* Assets.xcassets */; };
+		3F82FC281DD233F5009430AF /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3F82FC271DD233F5009430AF /* Info.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -45,6 +46,7 @@
 		3F82FC1D1DD231F4009430AF /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
 		3F82FC1E1DD231F4009430AF /* GameScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
 		3F82FC231DD2322C009430AF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		3F82FC271DD233F5009430AF /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,6 +86,7 @@
 				3F82FC0A1DD231E4009430AF /* LaunchScreen.storyboard */,
 				3F82FC231DD2322C009430AF /* Assets.xcassets */,
 				3F82FC0B1DD231E4009430AF /* Main.storyboard */,
+				3F82FC271DD233F5009430AF /* Info.plist */,
 				3F82FC221DD23200009430AF /* Game States */,
 				3F82FC251DD2323B009430AF /* Particles */,
 				3F82FC261DD23256009430AF /* Sounds */,
@@ -190,6 +193,7 @@
 				3F82FC121DD231E4009430AF /* BrokenPlatform.sks in Resources */,
 				3F82FC161DD231E4009430AF /* LaunchScreen.storyboard in Resources */,
 				3F82FC201DD231F4009430AF /* GameScene.sks in Resources */,
+				3F82FC281DD233F5009430AF /* Info.plist in Resources */,
 				3F82FC141DD231E4009430AF /* game-won.mp3 in Resources */,
 				3F82FC101DD231E4009430AF /* BallTrail.sks in Resources */,
 				3F82FC1A1DD231E4009430AF /* pongblip.wav in Resources */,
