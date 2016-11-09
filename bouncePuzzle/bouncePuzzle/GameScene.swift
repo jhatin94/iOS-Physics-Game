@@ -51,6 +51,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             gameOver.run(actionSequence)
         }
     }
+    var gameLost: Bool = false // JHAT: used to disable win checking
     var ball: SKSpriteNode!
     
     // sounds
@@ -95,28 +96,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let trail = SKEmitterNode(fileNamed: "BallTrail")!
         trail.targetNode = trailNode
         ball.addChild(trail)
-        
-        // add blocks
-        let numberOfBlocks = 8
-        let blockWidth = SKSpriteNode(imageNamed: "block").size.width
-        let totalBlocksWidth = blockWidth * CGFloat(numberOfBlocks)
-        
-        let xOffset = (frame.width - totalBlocksWidth)/2
-        
-        /*for i in 0..<numberOfBlocks {
-            let block = SKSpriteNode(imageNamed: "block.png")
-            block.position = CGPoint(x: xOffset + CGFloat(CGFloat(i) + 0.5) * blockWidth, y: frame.height * 0.8)
-            
-            block.physicsBody = SKPhysicsBody(rectangleOf: block.frame.size)
-            block.physicsBody!.allowsRotation = false
-            block.physicsBody!.friction = 0.0
-            block.physicsBody!.affectedByGravity = false
-            block.physicsBody!.isDynamic = false
-            block.name = BlockCategoryName
-            block.physicsBody!.categoryBitMask = BlockCategory
-            block.zPosition = 2
-            addChild(block)
-        }*/
         
         // create launch state
         let gameMessage = SKSpriteNode(imageNamed: "TapToPlay")
@@ -178,7 +157,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     override func update(_ currentTime: TimeInterval) {
         gameState.update(deltaTime: currentTime)
         let complete = isGameWon()
-        if (complete) {
+        if (complete && !gameLost) {
             gameWon = true
             gameState.enter(GameOver.self)
         }
@@ -198,7 +177,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 secondBody = contact.bodyA
             }
             
-            // determine collisions for sound
+            // determine collisions for sound            
             if (firstBody.categoryBitMask == BallCategory && secondBody.categoryBitMask == BorderCategory) {
                 run(blipSound)
             }
@@ -211,8 +190,38 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 // failed
                 gameState.enter(GameOver.self)
                 gameWon = false
+                gameLost = true
+            }
+            else if (firstBody.categoryBitMask == BallCategory && secondBody.categoryBitMask == PaddleCategory) {
+                // determine which half of paddle touchesEnded
+                if (contact.contactPoint.x > (secondBody.node?.position.x)!) { // right side contact
+                }
+                else if (contact.contactPoint.x < (secondBody.node?.position.x)!) { // left side contact
+                    physicsWorld.gravity = CGVector(dx: 0.0, dy: -1.8)
+                }
             }
         }
+    }
+    
+    func didEnd(_ contact: SKPhysicsContact) {
+        if gameState.currentState is Playing {
+            var firstBody: SKPhysicsBody
+            var secondBody: SKPhysicsBody
+            
+            if (contact.bodyA.categoryBitMask < contact.bodyB.categoryBitMask) {
+                firstBody = contact.bodyA
+                secondBody = contact.bodyB
+            }
+            else {
+                firstBody = contact.bodyB
+                secondBody = contact.bodyA
+            }
+            
+            if (firstBody.categoryBitMask == BallCategory && secondBody.categoryBitMask == PaddleCategory){
+                Timer.scheduledTimer(withTimeInterval: 1.0, repeats: false, block: { _ in
+                    self.physicsWorld.gravity = CGVector(dx: 0.0, dy: 0.0)
+                })
+            }}
     }
     
     func breakBlock(node: SKNode) {
