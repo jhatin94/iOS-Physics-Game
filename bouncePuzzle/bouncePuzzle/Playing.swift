@@ -22,26 +22,19 @@ class Playing: GKState {
     
     override func update(deltaTime seconds: TimeInterval) {
         let ball = scene.childNode(withName: BallCategoryName) as! SKSpriteNode
-        let maxSpeed: CGFloat = 400.0
         let xSpeed = sqrt(ball.physicsBody!.velocity.dx * ball.physicsBody!.velocity.dx)
         let ySpeed = sqrt(ball.physicsBody!.velocity.dy * ball.physicsBody!.velocity.dy)
         
         let speed = sqrt(xSpeed + ySpeed)
         let gravityOn = scene.physicsWorld.gravity.dy < 0
         
-        if (xSpeed <= 10.0 && !gravityOn) {
+        if (xSpeed <= 100.0 && !gravityOn) {
             ball.physicsBody!.applyImpulse(CGVector(dx: randomDirection(), dy: 0.0))
         }
-        if (ySpeed <= 10.0 && !gravityOn) {
+        if (ySpeed <= 100.0 && !gravityOn) {
             ball.physicsBody!.applyImpulse(CGVector(dx: 0.0, dy: randomDirection()))
         }
         print("Speed: \(speed)")
-        if (speed > maxSpeed) {
-            ball.physicsBody!.linearDamping = 0.6
-        }
-        else {
-            ball.physicsBody!.linearDamping = 0.0
-        }
     }
     
     override func isValidNextState(_ stateClass: AnyClass) -> Bool {
@@ -50,6 +43,7 @@ class Playing: GKState {
     
     func randomDirection() -> CGFloat {
         let speedFactor: CGFloat = 2.0
+        print("Adding Impulse")
         if (scene.randomFloat(from: 0.0, to: 100.0) >= 50) {
             return -speedFactor
         }

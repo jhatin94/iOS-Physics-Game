@@ -193,8 +193,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 gameLost = true
             }
             else if (firstBody.categoryBitMask == BallCategory && secondBody.categoryBitMask == PaddleCategory) {
-                // determine which half of paddle touchesEnded
+                // determine which half of paddle collided
                 if (contact.contactPoint.x > (secondBody.node?.position.x)!) { // right side contact
+                    physicsWorld.gravity = CGVector(dx: 0.0, dy: -0.2)
                 }
                 else if (contact.contactPoint.x < (secondBody.node?.position.x)!) { // left side contact
                     physicsWorld.gravity = CGVector(dx: 0.0, dy: -1.8)
@@ -218,20 +219,18 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             }
             
             if (firstBody.categoryBitMask == BallCategory && secondBody.categoryBitMask == PaddleCategory){
-                Timer.scheduledTimer(withTimeInterval: 1.0, repeats: false, block: { _ in
-                    self.physicsWorld.gravity = CGVector(dx: 0.0, dy: 0.0)
-                })
+                // determine which half of paddle hit
+                if (contact.contactPoint.x > (secondBody.node?.position.x)!) { // right side contact
+                    Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false, block: { _ in
+                        self.physicsWorld.gravity = CGVector(dx: 0.0, dy: 0.0)
+                    })
+                }
+                else if (contact.contactPoint.x < (secondBody.node?.position.x)!) { // left side contact
+                    Timer.scheduledTimer(withTimeInterval: 1.5, repeats: false, block: { _ in
+                        self.physicsWorld.gravity = CGVector(dx: 0.0, dy: 0.0)
+                    })
+                }
             }}
-    }
-    
-    func breakBlock(node: SKNode) {
-        run(bambooBreakSound)
-        let particles = SKEmitterNode(fileNamed: "BrokenPlatform")!
-        particles.position = node.position
-        particles.zPosition = 3
-        addChild(particles)
-        particles.run(SKAction.sequence([SKAction.wait(forDuration: 1.0), SKAction.removeFromParent()]))
-        node.removeFromParent()
     }
     
     func randomFloat(from: CGFloat, to: CGFloat) -> CGFloat {
