@@ -26,8 +26,11 @@
 import SpriteKit
 import GameplayKit
 
+var level = 1;
+
 let BallCategoryName = "ball"
 let PaddleCategoryName = "paddle"
+let TriangleCategoryName = "triangle"
 let BlockCategoryName = "block"
 let GameMessageName = "gameMessage"
 
@@ -37,6 +40,8 @@ let BottomCategory: UInt32 = 0x1 << 1
 let BlockCategory: UInt32 = 0x1 << 2
 let PaddleCategory: UInt32 = 0x1 << 3
 let BorderCategory: UInt32 = 0x1 << 4
+
+
 
 class GameScene: SKScene, SKPhysicsContactDelegate {
     var isFingerOnPaddle = false
@@ -78,7 +83,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         addChild(bottom)
         
         // assign category masks
-        let paddle = childNode(withName: PaddleCategoryName) as! SKSpriteNode
+        let paddle = childNode(withName: PaddleCategoryName) as! SKSpriteNode   
         
         bottom.physicsBody!.categoryBitMask = BottomCategory
         ball.physicsBody!.categoryBitMask = BallCategory
@@ -125,10 +130,41 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             }
             break
         case is GameOver:
-            let newScene = GameScene(fileNamed: "GameScene")
-            newScene!.scaleMode = .aspectFit
-            let reveal = SKTransition.flipHorizontal(withDuration: 0.5)
-            self.view?.presentScene(newScene!, transition: reveal)
+            if (gameWon == true)
+            {
+                level += 1
+            }
+            print(level)
+            if ( level == 1){
+                let newScene = GameScene(fileNamed: "level1")
+                newScene!.scaleMode = .aspectFit
+                let reveal = SKTransition.flipHorizontal(withDuration: 0.5)
+                self.view?.presentScene(newScene!, transition: reveal)
+            }
+            if ( level == 2){
+                let newScene = GameScene(fileNamed: "level2")
+                newScene!.scaleMode = .aspectFit
+                let reveal = SKTransition.flipHorizontal(withDuration: 0.5)
+                self.view?.presentScene(newScene!, transition: reveal)
+            }
+            if ( level == 3){
+                let newScene = GameScene(fileNamed: "level3")
+                newScene!.scaleMode = .aspectFit
+                let reveal = SKTransition.flipHorizontal(withDuration: 0.5)
+                self.view?.presentScene(newScene!, transition: reveal)
+            }
+            if ( level == 4){
+                let newScene = GameScene(fileNamed: "level4")
+                newScene!.scaleMode = .aspectFit
+                let reveal = SKTransition.flipHorizontal(withDuration: 0.5)
+                self.view?.presentScene(newScene!, transition: reveal)
+            }
+            if ( level == 5){
+                let newScene = GameScene(fileNamed: "level5")
+                newScene!.scaleMode = .aspectFit
+                let reveal = SKTransition.flipHorizontal(withDuration: 0.5)
+                self.view?.presentScene(newScene!, transition: reveal)
+            }
         default:
             break
         }
@@ -160,6 +196,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         if (complete && !gameLost) {
             gameWon = true
             gameState.enter(GameOver.self)
+            
         }
     }
     
