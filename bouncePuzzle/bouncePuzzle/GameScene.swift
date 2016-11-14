@@ -60,11 +60,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var ball: SKSpriteNode!
     
     // sounds
-    let blipSound = SKAction.playSoundFileNamed("pongblip", waitForCompletion: false)
-    let blipPaddleSound = SKAction.playSoundFileNamed("paddleBlip", waitForCompletion: false)
-    let bambooBreakSound = SKAction.playSoundFileNamed("BambooBreak", waitForCompletion: false)
-    let gameWonSound = SKAction.playSoundFileNamed("game-won", waitForCompletion: false)
-    let gameOverSound = SKAction.playSoundFileNamed("game-over", waitForCompletion: false)
+    let blipSound = SKAction.playSoundFileNamed("ball", waitForCompletion: false)
+    let blipPaddleSound = SKAction.playSoundFileNamed("paddle", waitForCompletion: false)
+    let gameWonSound = SKAction.playSoundFileNamed("won", waitForCompletion: false)
+    let gameOverSound = SKAction.playSoundFileNamed("lost", waitForCompletion: false)
     
     override func didMove(to view: SKView) {
         super.didMove(to: view)
