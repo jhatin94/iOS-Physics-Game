@@ -21,6 +21,18 @@ class Playing: GKState {
     }
     
     override func update(deltaTime seconds: TimeInterval) {
+        
+        scene.enumerateChildNodes(withName: TriangleCategoryName){
+            node, _ in
+            
+            guard (node != nil)else{
+                return
+            }
+            node.zRotation = node.zRotation - 0.05;
+        }
+        
+        
+        
         let ball = scene.childNode(withName: BallCategoryName) as! SKSpriteNode
         let xSpeed = sqrt(ball.physicsBody!.velocity.dx * ball.physicsBody!.velocity.dx)
         let ySpeed = sqrt(ball.physicsBody!.velocity.dy * ball.physicsBody!.velocity.dy)
