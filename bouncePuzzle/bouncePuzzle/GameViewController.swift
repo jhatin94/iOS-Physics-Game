@@ -27,26 +27,99 @@ import UIKit
 import SpriteKit
 
 class GameViewController: UIViewController {
-
+    let screenSize = CGSize(width: 1080, height: 1920)
+    var gameScene: GameScene?
+    var menuScene: MenuScene?
+    var completedScene: CompletedScene?
+    var skView: SKView!
+    let defaults = UserDefaults.standard
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        if let scene = GameScene(fileNamed:"level1") {
-            // Configure the view.
-            let skView = self.view as! SKView
-            skView.showsFPS = true
-            skView.showsNodeCount = true
-            
-            /* Sprite Kit applies additional optimizations to improve rendering performance */
-            skView.ignoresSiblingOrder = true
-            
-            /* Set the scale mode to scale to fit the window */
-            scene.scaleMode = .aspectFit
-            
-            skView.presentScene(scene)
+        
+        // Configure the view.
+        skView = self.view as! SKView
+        skView.showsFPS = true
+        skView.showsNodeCount = true
+        
+        /* Sprite Kit applies additional optimizations to improve rendering performance */
+        skView.ignoresSiblingOrder = true
+        
+        
+        // load player profile
+        loadPlayerData()
+        
+        // register profile to save when app is closed
+        NotificationCenter.default.addObserver(self, selector: #selector(saveUserDataOnExit), name: NSNotification.Name.UIApplicationWillResignActive, object: nil)
+        
+        // Load menu
+        loadMenu(menuToLoad: MenuScene.MenuType.main)
+    }
+    
+    // MARK: Scene loading funcs
+    func loadMenu(menuToLoad: MenuScene.MenuType) {
+        // clear other scenes from memory
+        clearGameSceneFromMemory()
+        clearCompletedSceneFromMemory()
+        menuScene = MenuScene(menuToDisplay: menuToLoad, sceneManager: self, size: screenSize)
+        let reveal = SKTransition.fade(withDuration: 2)
+        skView.presentScene(menuScene!, transition: reveal)
+    }
+    
+    func loadGameScene(lvl: Int) {
+        // clear other scenes from memory
+        clearMenuSceneFromMemory()
+        clearCompletedSceneFromMemory()
+        gameScene = GameScene(fileNamed: "level\(lvl)")
+        gameScene?.scaleMode = .aspectFit    /* Set the scale mode to scale to fit the window */
+        gameScene?.sceneManager = self
+        gameScene?.currentLevel = lvl
+        let reveal = SKTransition.fade(withDuration: 2)
+        skView.presentScene(gameScene!, transition: reveal)
+    }
+    
+    func loadCompleteScene() {
+        // clear other scenes from memory
+        clearGameSceneFromMemory()
+        clearMenuSceneFromMemory()
+    }
+    
+    // MARK: Model interaction functions
+    private func loadPlayerData() {
+        let lvlsCompleted = defaults.integer(forKey: "level")
+        
+        PlayerData.playerData.setHighestLevelComplete(maxLevelComp: lvlsCompleted)
+    }
+    
+    func saveProgress(dataToSave: PlayerData) {
+        defaults.set(dataToSave.highestLevelCompleted, forKey: "level")
+    }
+    
+    func saveUserDataOnExit() {
+        saveProgress(dataToSave: PlayerData.playerData)
+    }
+        
+    // MARK: memory freeing functions
+    private func clearGameSceneFromMemory() {
+        if (gameScene != nil) {
+            gameScene = nil
         }
     }
-
+    
+    private func clearMenuSceneFromMemory() {
+        if (menuScene != nil) {
+            menuScene = nil
+        }
+    }
+    
+    private func clearCompletedSceneFromMemory() {
+        if (completedScene != nil) {
+            completedScene = nil
+        }
+    }
+    
+    
+    // MARK: Standard funcs
     override var shouldAutorotate : Bool {
         return true
     }

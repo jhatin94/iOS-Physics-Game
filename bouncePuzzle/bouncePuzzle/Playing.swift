@@ -31,8 +31,6 @@ class Playing: GKState {
             node.zRotation = node.zRotation - 0.05;
         }
         
-        
-        
         let ball = scene.childNode(withName: BallCategoryName) as! SKSpriteNode
         let xSpeed = sqrt(ball.physicsBody!.velocity.dx * ball.physicsBody!.velocity.dx)
         let ySpeed = sqrt(ball.physicsBody!.velocity.dy * ball.physicsBody!.velocity.dy)

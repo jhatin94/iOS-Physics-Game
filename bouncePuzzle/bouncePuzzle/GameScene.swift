@@ -26,8 +26,6 @@
 import SpriteKit
 import GameplayKit
 
-var level = 1;
-
 let BallCategoryName = "ball"
 let PaddleCategoryName = "paddle"
 let TriangleCategoryName = "triangle"
@@ -58,6 +56,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     var gameLost: Bool = false // JHAT: used to disable win checking
     var ball: SKSpriteNode!
+    var currentLevel: Int!
+    var sceneManager: GameViewController!
     
     // sounds
     let blipSound = SKAction.playSoundFileNamed("ball", waitForCompletion: false)
@@ -129,40 +129,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             }
             break
         case is GameOver:
-            if (gameWon == true)
-            {
-                level += 1
+            if (currentLevel < 5) { // TODO: Change cap as levels increase
+                // Call ViewController to change Scene
+                gameWon ? sceneManager.loadGameScene(lvl: currentLevel + 1) : sceneManager.loadGameScene(lvl: currentLevel)
             }
-            print(level)
-            if ( level == 1){
-                let newScene = GameScene(fileNamed: "level1")
-                newScene!.scaleMode = .aspectFit
-                let reveal = SKTransition.flipHorizontal(withDuration: 0.5)
-                self.view?.presentScene(newScene!, transition: reveal)
-            }
-            if ( level == 2){
-                let newScene = GameScene(fileNamed: "level2")
-                newScene!.scaleMode = .aspectFit
-                let reveal = SKTransition.flipHorizontal(withDuration: 0.5)
-                self.view?.presentScene(newScene!, transition: reveal)
-            }
-            if ( level == 3){
-                let newScene = GameScene(fileNamed: "level3")
-                newScene!.scaleMode = .aspectFit
-                let reveal = SKTransition.flipHorizontal(withDuration: 0.5)
-                self.view?.presentScene(newScene!, transition: reveal)
-            }
-            if ( level == 4){
-                let newScene = GameScene(fileNamed: "level4")
-                newScene!.scaleMode = .aspectFit
-                let reveal = SKTransition.flipHorizontal(withDuration: 0.5)
-                self.view?.presentScene(newScene!, transition: reveal)
-            }
-            if ( level == 5){
-                let newScene = GameScene(fileNamed: "level5")
-                newScene!.scaleMode = .aspectFit
-                let reveal = SKTransition.flipHorizontal(withDuration: 0.5)
-                self.view?.presentScene(newScene!, transition: reveal)
+            else {
+                // TODO: Show Game Complete Screen
             }
         default:
             break
