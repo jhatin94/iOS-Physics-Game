@@ -70,6 +70,7 @@ class GameViewController: UIViewController {
         // clear other scenes from memory
         clearMenuSceneFromMemory()
         clearCompletedSceneFromMemory()
+        updateLevelsComplete(lvlLoading: lvl) // update playerData if new level is complete
         gameScene = GameScene(fileNamed: "level\(lvl)")
         gameScene?.scaleMode = .aspectFit    /* Set the scale mode to scale to fit the window */
         gameScene?.sceneManager = self
@@ -98,6 +99,16 @@ class GameViewController: UIViewController {
     func saveUserDataOnExit() {
         saveProgress(dataToSave: PlayerData.playerData)
     }
+    
+    private func updateLevelsComplete(lvlLoading: Int) {
+        // JHAT: check if the level prior to the level loading has been beaten
+        let priorCompletedLevel = lvlLoading - 1;
+        
+        if (priorCompletedLevel > PlayerData.playerData.highestLevelCompleted) {
+            PlayerData.playerData.setHighestLevelComplete(maxLevelComp: priorCompletedLevel)
+            saveUserDataOnExit() // JHAT: method is simpler to use here even though not leaving app
+        }
+    }
         
     // MARK: memory freeing functions
     private func clearGameSceneFromMemory() {
@@ -117,7 +128,6 @@ class GameViewController: UIViewController {
             completedScene = nil
         }
     }
-    
     
     // MARK: Standard funcs
     override var shouldAutorotate : Bool {

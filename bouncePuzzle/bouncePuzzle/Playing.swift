@@ -22,12 +22,8 @@ class Playing: GKState {
     
     override func update(deltaTime seconds: TimeInterval) {
         
-        scene.enumerateChildNodes(withName: TriangleCategoryName){
+        scene.enumerateChildNodes(withName: TriangleCategoryName){ // automatically filters out nil
             node, _ in
-            
-            guard (node != nil)else{
-                return
-            }
             node.zRotation = node.zRotation - 0.05;
         }
         
