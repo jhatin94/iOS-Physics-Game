@@ -134,7 +134,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 gameWon ? sceneManager.loadGameScene(lvl: currentLevel + 1) : sceneManager.loadGameScene(lvl: currentLevel)
             }
             else {
-                // TODO: Show Game Complete Screen
+                // Show Game Complete Screen
+                sceneManager.loadMenu(menuToLoad: MenuScene.MenuType.completed)
             }
         default:
             break

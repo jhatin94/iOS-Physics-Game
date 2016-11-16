@@ -30,7 +30,6 @@ class GameViewController: UIViewController {
     let screenSize = CGSize(width: 568, height: 320)
     var gameScene: GameScene?
     var menuScene: MenuScene?
-    var completedScene: CompletedScene?
     var skView: SKView!
     let defaults = UserDefaults.standard
     
@@ -60,7 +59,6 @@ class GameViewController: UIViewController {
     func loadMenu(menuToLoad: MenuScene.MenuType) {
         // clear other scenes from memory
         clearGameSceneFromMemory()
-        clearCompletedSceneFromMemory()
         menuScene = MenuScene(menuToDisplay: menuToLoad, sceneManager: self, size: screenSize)
         let reveal = SKTransition.fade(withDuration: 2)
         skView.presentScene(menuScene!, transition: reveal)
@@ -69,7 +67,6 @@ class GameViewController: UIViewController {
     func loadGameScene(lvl: Int) {
         // clear other scenes from memory
         clearMenuSceneFromMemory()
-        clearCompletedSceneFromMemory()
         updateLevelsComplete(lvlLoading: lvl) // update playerData if new level is complete
         gameScene = GameScene(fileNamed: "level\(lvl)")
         gameScene?.scaleMode = .aspectFit    /* Set the scale mode to scale to fit the window */
@@ -120,12 +117,6 @@ class GameViewController: UIViewController {
     private func clearMenuSceneFromMemory() {
         if (menuScene != nil) {
             menuScene = nil
-        }
-    }
-    
-    private func clearCompletedSceneFromMemory() {
-        if (completedScene != nil) {
-            completedScene = nil
         }
     }
     

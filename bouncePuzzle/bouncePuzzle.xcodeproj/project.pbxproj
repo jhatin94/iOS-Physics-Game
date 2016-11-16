@@ -23,7 +23,6 @@
 		3F57BE571DDBB35B005AC9EC /* PlayerData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F57BE561DDBB35B005AC9EC /* PlayerData.swift */; };
 		3F57BE591DDBC287005AC9EC /* LabelCreation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F57BE581DDBC287005AC9EC /* LabelCreation.swift */; };
 		3F57BE5B1DDBC32C005AC9EC /* MenuScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F57BE5A1DDBC32C005AC9EC /* MenuScene.swift */; };
-		3F57BE5D1DDBC33E005AC9EC /* CompletedScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F57BE5C1DDBC33E005AC9EC /* CompletedScene.swift */; };
 		3F82FC031DD23160009430AF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F82FC021DD23160009430AF /* AppDelegate.swift */; };
 		3F82FC101DD231E4009430AF /* BallTrail.sks in Resources */ = {isa = PBXBuildFile; fileRef = 3F82FC041DD231E4009430AF /* BallTrail.sks */; };
 		3F82FC151DD231E4009430AF /* GameOver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F82FC091DD231E4009430AF /* GameOver.swift */; };
@@ -54,7 +53,6 @@
 		3F57BE561DDBB35B005AC9EC /* PlayerData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerData.swift; sourceTree = "<group>"; };
 		3F57BE581DDBC287005AC9EC /* LabelCreation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LabelCreation.swift; sourceTree = "<group>"; };
 		3F57BE5A1DDBC32C005AC9EC /* MenuScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuScene.swift; sourceTree = "<group>"; };
-		3F57BE5C1DDBC33E005AC9EC /* CompletedScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompletedScene.swift; sourceTree = "<group>"; };
 		3F82FBE71DD230CD009430AF /* bouncePuzzle.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = bouncePuzzle.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3F82FC021DD23160009430AF /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3F82FC041DD231E4009430AF /* BallTrail.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = BallTrail.sks; sourceTree = "<group>"; };
@@ -103,7 +101,6 @@
 			children = (
 				3F82FC1E1DD231F4009430AF /* GameScene.swift */,
 				3F57BE5A1DDBC32C005AC9EC /* MenuScene.swift */,
-				3F57BE5C1DDBC33E005AC9EC /* CompletedScene.swift */,
 			);
 			name = Scenes;
 			sourceTree = "<group>";
@@ -267,7 +264,6 @@
 				3F57BE5B1DDBC32C005AC9EC /* MenuScene.swift in Sources */,
 				3F57BE591DDBC287005AC9EC /* LabelCreation.swift in Sources */,
 				3F82FC191DD231E4009430AF /* Playing.swift in Sources */,
-				3F57BE5D1DDBC33E005AC9EC /* CompletedScene.swift in Sources */,
 				3F82FC1B1DD231E4009430AF /* WaitingForTap.swift in Sources */,
 				3F82FC031DD23160009430AF /* AppDelegate.swift in Sources */,
 				3F82FC151DD231E4009430AF /* GameOver.swift in Sources */,

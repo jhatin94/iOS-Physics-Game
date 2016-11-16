@@ -16,6 +16,7 @@ class MenuScene: SKScene {
         case main
         case instructions
         case levelSelect
+        case completed
     }
     
     init(menuToDisplay: MenuType, sceneManager: GameViewController, size: CGSize) {
@@ -32,6 +33,9 @@ class MenuScene: SKScene {
             break
         case MenuType.instructions:
             drawInstr()
+            break
+        case MenuType.completed:
+            drawComplete()
             break
         }
     }
@@ -72,7 +76,40 @@ class MenuScene: SKScene {
         case "lvl5"?:
             sceneManager.loadGameScene(lvl: 5)
             break
+        case "lvl6"?:
+            sceneManager.loadGameScene(lvl: 6)
+            break
+        case "lvl7"?:
+            sceneManager.loadGameScene(lvl: 7)
+            break
+        case "lvl8"?:
+            sceneManager.loadGameScene(lvl: 8)
+            break
+        case "lvl9"?:
+            sceneManager.loadGameScene(lvl: 9)
+            break
+        case "lvl10"?:
+            sceneManager.loadGameScene(lvl: 10)
+            break
+        case "lvl11"?:
+            sceneManager.loadGameScene(lvl: 11)
+            break
+        case "lvl12"?:
+            sceneManager.loadGameScene(lvl: 12)
+            break
+        case "lvl13"?:
+            sceneManager.loadGameScene(lvl: 13)
+            break
+        case "lvl14"?:
+            sceneManager.loadGameScene(lvl: 14)
+            break
+        case "lvl15"?:
+            sceneManager.loadGameScene(lvl: 15)
+            break
         case "returnLS"?:
+            sceneManager.loadMenu(menuToLoad: MenuType.main)
+            break
+        case "returnC"?: // Game complete selectables
             sceneManager.loadMenu(menuToLoad: MenuType.main)
             break
         default:
@@ -103,22 +140,62 @@ class MenuScene: SKScene {
         
         addChild(createMontserratLabel(pos: CGPoint(x: size.width/2, y: size.height - 50), fontSize: 36, text: "Level Select", name: "lvlSelectTitle"))
         
-        addChild(createMontserratLabel(pos: CGPoint(x: size.width/5, y: size.height/2 + 80), fontSize: 30, text: "Level 1", name: "lvl1"))
+        addChild(createMontserratLabel(pos: CGPoint(x: size.width/5, y: size.height/2 + 60), fontSize: 30, text: "Level 1", name: "lvl1"))
         
         if (levelsUnlocked > 1) {
-            addChild(createMontserratLabel(pos: CGPoint(x: size.width/5, y: size.height/2 + 40), fontSize: 30, text: "Level 2", name: "lvl2"))
+            addChild(createMontserratLabel(pos: CGPoint(x: size.width/5, y: size.height/2 + 20), fontSize: 30, text: "Level 2", name: "lvl2"))
         }
         
         if (levelsUnlocked > 2) {
-            addChild(createMontserratLabel(pos: CGPoint(x: size.width/5, y: size.height/2), fontSize: 30, text: "Level 3", name: "lvl3"))
+            addChild(createMontserratLabel(pos: CGPoint(x: size.width/5, y: size.height/2 - 20), fontSize: 30, text: "Level 3", name: "lvl3"))
         }
         
         if (levelsUnlocked > 3) {
-            addChild(createMontserratLabel(pos: CGPoint(x: size.width/5, y: size.height/2 - 40), fontSize: 30, text: "Level 4", name: "lvl4"))
+            addChild(createMontserratLabel(pos: CGPoint(x: size.width/5, y: size.height/2 - 60), fontSize: 30, text: "Level 4", name: "lvl4"))
         }
         
         if (levelsUnlocked > 4) {
-            addChild(createMontserratLabel(pos: CGPoint(x: size.width/5, y: size.height/2 - 80), fontSize: 30, text: "Level 5", name: "lvl5"))
+            addChild(createMontserratLabel(pos: CGPoint(x: size.width/5, y: size.height/2 - 100), fontSize: 30, text: "Level 5", name: "lvl5"))
+        }
+        
+        if (levelsUnlocked > 5) {
+            addChild(createMontserratLabel(pos: CGPoint(x: size.width/2, y: size.height/2 + 60), fontSize: 30, text: "Level 6", name: "lvl6"))
+        }
+        
+        if (levelsUnlocked > 6) {
+            addChild(createMontserratLabel(pos: CGPoint(x: size.width/2, y: size.height/2 + 20), fontSize: 30, text: "Level 7", name: "lvl7"))
+        }
+        
+        if (levelsUnlocked > 7) {
+            addChild(createMontserratLabel(pos: CGPoint(x: size.width/2, y: size.height/2 - 20), fontSize: 30, text: "Level 8", name: "lvl8"))
+        }
+        
+        if (levelsUnlocked > 8) {
+            addChild(createMontserratLabel(pos: CGPoint(x: size.width/2, y: size.height/2 - 60), fontSize: 30, text: "Level 9", name: "lvl9"))
+        }
+        
+        if (levelsUnlocked > 9) {
+            addChild(createMontserratLabel(pos: CGPoint(x: size.width/2, y: size.height/2 - 100), fontSize: 30, text: "Level 10", name: "lvl10"))
+        }
+        
+        if (levelsUnlocked > 10) {
+            addChild(createMontserratLabel(pos: CGPoint(x: size.width * 4/5, y: size.height/2 + 60), fontSize: 30, text: "Level 11", name: "lvl11"))
+        }
+        
+        if (levelsUnlocked > 11) {
+            addChild(createMontserratLabel(pos: CGPoint(x: size.width * 4/5, y: size.height/2 + 20), fontSize: 30, text: "Level 12", name: "lvl12"))
+        }
+        
+        if (levelsUnlocked > 12) {
+            addChild(createMontserratLabel(pos: CGPoint(x: size.width * 4/5, y: size.height/2 - 20), fontSize: 30, text: "Level 13", name: "lvl13"))
+        }
+        
+        if (levelsUnlocked > 13) {
+            addChild(createMontserratLabel(pos: CGPoint(x: size.width * 4/5, y: size.height/2 - 60), fontSize: 30, text: "Level 14", name: "lvl14"))
+        }
+        
+        if (levelsUnlocked > 14) {
+            addChild(createMontserratLabel(pos: CGPoint(x: size.width * 4/5, y: size.height/2 - 100), fontSize: 30, text: "Level 15", name: "lvl15"))
         }
         
         addChild(createMontserratLabel(pos: CGPoint(x: size.width/7, y: 20), fontSize: 14, text: "Return to Main Menu", name: "returnLS"))
@@ -136,5 +213,19 @@ class MenuScene: SKScene {
         addChild(createMontserratLabel(pos: CGPoint(x: size.width/2, y: size.height/2 - 50), fontSize: 20, text: "The left side of the paddle makes the ball bounce lower", name: "instr3"))
         
         addChild(createMontserratLabel(pos: CGPoint(x: size.width/7, y: 20), fontSize: 14, text: "Return to Main Menu", name: "returnHTP"))
+    }
+    
+    func drawComplete() {
+        backgroundColor = SKColor.black
+        
+        addChild(createMontserratLabel(pos: CGPoint(x: size.width/2, y: size.height - 50), fontSize: 36, text: "Congratulations!", name: "compTitle"))
+        
+        addChild(createMontserratLabel(pos: CGPoint(x: size.width/2, y: size.height/2 + 50), fontSize: 20, text: "You have finished all of the levels!", name: "comp1"))
+        
+        addChild(createMontserratLabel(pos: CGPoint(x: size.width/2, y: size.height/2), fontSize: 20, text: "Thank you for playing!", name: "comp2"))
+        
+        addChild(createMontserratLabel(pos: CGPoint(x: size.width/2, y: size.height/2 - 50), fontSize: 20, text: "You can now replay any level in Level Select", name: "comp3"))
+        
+        addChild(createMontserratLabel(pos: CGPoint(x: size.width/7, y: 20), fontSize: 14, text: "Return to Main Menu", name: "returnC"))
     }
 }
