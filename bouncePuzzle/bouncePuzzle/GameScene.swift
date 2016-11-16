@@ -58,6 +58,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var ball: SKSpriteNode!
     var currentLevel: Int!
     var sceneManager: GameViewController!
+    var movingParts: [SKNode] = []
     
     // sounds
     let blipSound = SKAction.playSoundFileNamed("ball", waitForCompletion: false)
@@ -87,6 +88,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         bottom.physicsBody!.categoryBitMask = BottomCategory
         ball.physicsBody!.categoryBitMask = BallCategory
         paddle.physicsBody!.categoryBitMask = PaddleCategory
+        paddle.physicsBody!.collisionBitMask = BallCategory
         borderBody.categoryBitMask = BorderCategory
         
         // get ball/bottom collision
@@ -109,6 +111,45 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         gameMessage.setScale(0.05)
         addChild(gameMessage)
         
+        // set up moving block actions
+        enumerateChildNodes(withName: "*", using: {
+            node, _ in
+            let nodeName = node.name
+            
+            if (nodeName != nil && (nodeName!.contains("path") || nodeName!.contains("sq"))) {
+                self.movingParts.append(node)
+            }
+        })
+        
+        if (movingParts.count > 1) {
+            for node in movingParts {
+                let nodeName = node.name!
+                if (nodeName.contains("sqv")) { // get corresponding path node
+                    let numv = nodeName.substring(from: nodeName.index(nodeName.endIndex, offsetBy: -1))
+                    let pathvNode = self.childNode(withName: "pathv\(numv)") as! SKSpriteNode
+                    let sqvNode = node
+                    sqvNode.physicsBody!.collisionBitMask = BallCategory
+                    
+                    let actionMoveOnev = SKAction.move(to: CGPoint(x: sqvNode.position.x, y: sqvNode.position.y - (pathvNode.frame.size.height)), duration: 2.0)
+                    
+                    let actionMoveBackv = SKAction.move(to: CGPoint(x: sqvNode.position.x, y: (pathvNode.position.y) + (pathvNode.frame.size.height)/2), duration: 2.0)
+                
+                    sqvNode.run(SKAction.repeatForever(SKAction.sequence([actionMoveOnev, actionMoveBackv])))
+                }
+                else if (nodeName.contains("sqh")) {
+                    let numh = nodeName.substring(from: nodeName.index(nodeName.endIndex, offsetBy: -1))
+                    let pathhNode = self.childNode(withName: "pathh\(numh)")
+                    let sqhNode = node
+                    sqhNode.physicsBody!.collisionBitMask = BallCategory
+                    
+                    let actionMoveOneh = SKAction.move(to: CGPoint(x: sqhNode.position.x + (pathhNode?.frame.size.width)!, y: sqhNode.position.y), duration: 2.0)
+                    let actionMoveBackh = SKAction.move(to: CGPoint(x: (pathhNode?.position.x)! - (pathhNode?.frame.size.width)!/2, y: sqhNode.position.y), duration: 2.0)
+                    
+                    sqhNode.run(SKAction.repeatForever(SKAction.sequence([actionMoveOneh, actionMoveBackh])))
+                }
+            }
+        }
+        
         gameState.enter(WaitingForTap.self)
     }
   
@@ -129,13 +170,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             }
             break
         case is GameOver:
-            if (currentLevel < 10) { // TODO: Change cap as levels increase
-                // Call ViewController to change Scene
-                gameWon ? sceneManager.loadGameScene(lvl: currentLevel + 1) : sceneManager.loadGameScene(lvl: currentLevel)
-            }
-            else {
+            if (currentLevel >= 10 && gameWon) { // TODO: Change cap as levels increase
                 // Show Game Complete Screen
                 sceneManager.loadMenu(menuToLoad: MenuScene.MenuType.completed)
+            }
+            else {
+                // Call ViewController to change Scene
+                gameWon ? sceneManager.loadGameScene(lvl: currentLevel + 1) : sceneManager.loadGameScene(lvl: currentLevel)
             }
         default:
             break
