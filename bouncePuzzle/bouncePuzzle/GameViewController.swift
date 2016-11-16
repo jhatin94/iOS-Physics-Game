@@ -27,7 +27,7 @@ import UIKit
 import SpriteKit
 
 class GameViewController: UIViewController {
-    let screenSize = CGSize(width: 1080, height: 1920)
+    let screenSize = CGSize(width: 568, height: 320)
     var gameScene: GameScene?
     var menuScene: MenuScene?
     var completedScene: CompletedScene?

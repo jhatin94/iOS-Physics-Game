@@ -15,6 +15,11 @@
 		1355C1A21DDA28B4008528FE /* lost.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 1355C19E1DDA28B4008528FE /* lost.mp3 */; };
 		1355C1A31DDA28B4008528FE /* paddle.wav in Resources */ = {isa = PBXBuildFile; fileRef = 1355C19F1DDA28B4008528FE /* paddle.wav */; };
 		1355C1A41DDA28B4008528FE /* won.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 1355C1A01DDA28B4008528FE /* won.mp3 */; };
+		13668C631DDCD28C008C9974 /* level6.sks in Resources */ = {isa = PBXBuildFile; fileRef = 13668C621DDCD28C008C9974 /* level6.sks */; };
+		13668C651DDCD30F008C9974 /* level7.sks in Resources */ = {isa = PBXBuildFile; fileRef = 13668C641DDCD30F008C9974 /* level7.sks */; };
+		13668C671DDCD4AF008C9974 /* level8.sks in Resources */ = {isa = PBXBuildFile; fileRef = 13668C661DDCD4AF008C9974 /* level8.sks */; };
+		13668C691DDCD60E008C9974 /* level9.sks in Resources */ = {isa = PBXBuildFile; fileRef = 13668C681DDCD60E008C9974 /* level9.sks */; };
+		13668C6D1DDCD774008C9974 /* level10.sks in Resources */ = {isa = PBXBuildFile; fileRef = 13668C6C1DDCD774008C9974 /* level10.sks */; };
 		3F57BE571DDBB35B005AC9EC /* PlayerData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F57BE561DDBB35B005AC9EC /* PlayerData.swift */; };
 		3F57BE591DDBC287005AC9EC /* LabelCreation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F57BE581DDBC287005AC9EC /* LabelCreation.swift */; };
 		3F57BE5B1DDBC32C005AC9EC /* MenuScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F57BE5A1DDBC32C005AC9EC /* MenuScene.swift */; };
@@ -42,6 +47,11 @@
 		1355C19E1DDA28B4008528FE /* lost.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = lost.mp3; sourceTree = "<group>"; };
 		1355C19F1DDA28B4008528FE /* paddle.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = paddle.wav; sourceTree = "<group>"; };
 		1355C1A01DDA28B4008528FE /* won.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = won.mp3; sourceTree = "<group>"; };
+		13668C621DDCD28C008C9974 /* level6.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = level6.sks; sourceTree = "<group>"; };
+		13668C641DDCD30F008C9974 /* level7.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = level7.sks; sourceTree = "<group>"; };
+		13668C661DDCD4AF008C9974 /* level8.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = level8.sks; sourceTree = "<group>"; };
+		13668C681DDCD60E008C9974 /* level9.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = level9.sks; sourceTree = "<group>"; };
+		13668C6C1DDCD774008C9974 /* level10.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = level10.sks; sourceTree = "<group>"; };
 		3F57BE561DDBB35B005AC9EC /* PlayerData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerData.swift; sourceTree = "<group>"; };
 		3F57BE581DDBC287005AC9EC /* LabelCreation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LabelCreation.swift; sourceTree = "<group>"; };
 		3F57BE5A1DDBC32C005AC9EC /* MenuScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuScene.swift; sourceTree = "<group>"; };
@@ -80,6 +90,11 @@
 				3F82FC1D1DD231F4009430AF /* level3.sks */,
 				1355C1991DDA2435008528FE /* level4.sks */,
 				1355C19A1DDA2435008528FE /* level5.sks */,
+				13668C621DDCD28C008C9974 /* level6.sks */,
+				13668C641DDCD30F008C9974 /* level7.sks */,
+				13668C661DDCD4AF008C9974 /* level8.sks */,
+				13668C681DDCD60E008C9974 /* level9.sks */,
+				13668C6C1DDCD774008C9974 /* level10.sks */,
 			);
 			name = Levels;
 			sourceTree = "<group>";
@@ -191,7 +206,7 @@
 				TargetAttributes = {
 					3F82FBE61DD230CD009430AF = {
 						CreatedOnToolsVersion = 8.0;
-						DevelopmentTeam = KT6L3A8T5R;
+						DevelopmentTeam = 9Z9L4R4J82;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -224,8 +239,13 @@
 				1355C1981DDA12E0008528FE /* level1.sks in Resources */,
 				3F82FC241DD2322C009430AF /* Assets.xcassets in Resources */,
 				1355C19C1DDA2435008528FE /* level5.sks in Resources */,
+				13668C671DDCD4AF008C9974 /* level8.sks in Resources */,
+				13668C6D1DDCD774008C9974 /* level10.sks in Resources */,
+				13668C631DDCD28C008C9974 /* level6.sks in Resources */,
 				1355C1A21DDA28B4008528FE /* lost.mp3 in Resources */,
+				13668C691DDCD60E008C9974 /* level9.sks in Resources */,
 				3F82FC161DD231E4009430AF /* LaunchScreen.storyboard in Resources */,
+				13668C651DDCD30F008C9974 /* level7.sks in Resources */,
 				3F82FC201DD231F4009430AF /* level3.sks in Resources */,
 				1355C19B1DDA2435008528FE /* level4.sks in Resources */,
 				3F82FC281DD233F5009430AF /* Info.plist in Resources */,
@@ -356,7 +376,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = KT6L3A8T5R;
+				DEVELOPMENT_TEAM = 9Z9L4R4J82;
 				INFOPLIST_FILE = bouncePuzzle/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.project2.bouncePuzzle;
@@ -370,7 +390,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = KT6L3A8T5R;
+				DEVELOPMENT_TEAM = 9Z9L4R4J82;
 				INFOPLIST_FILE = bouncePuzzle/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.project2.bouncePuzzle;

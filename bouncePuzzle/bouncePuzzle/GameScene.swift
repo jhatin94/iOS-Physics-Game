@@ -129,7 +129,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             }
             break
         case is GameOver:
-            if (currentLevel < 5) { // TODO: Change cap as levels increase
+            if (currentLevel < 10) { // TODO: Change cap as levels increase
                 // Call ViewController to change Scene
                 gameWon ? sceneManager.loadGameScene(lvl: currentLevel + 1) : sceneManager.loadGameScene(lvl: currentLevel)
             }

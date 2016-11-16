@@ -60,9 +60,17 @@ class MenuScene: SKScene {
     func drawMainMenu() {
         backgroundColor = SKColor.black
         
-        addChild(createMontserratLabel(pos: CGPoint(x: size.width/2, y: size.height/2 + 700), fontSize: 108, text: "REBOUND", name: "title"))
+    
+        let logo = SKSpriteNode(imageNamed: "rebound")
+        logo.position = CGPoint(x: frame.size.width / 2, y: size.height-50)
+        logo.setScale(0.3)
+        logo.zPosition = 1
+        addChild(logo)
         
-        addChild(createMontserratLabel(pos: CGPoint(x: size.width/2, y: size.height/2 + 2), fontSize: 50, text: "Play", name: "play"))
+        
+        addChild(createMontserratLabel(pos: CGPoint(x: size.width/2, y: size.height/2 + 10), fontSize: 30, text: "play", name: "play"))
+        addChild(createMontserratLabel(pos: CGPoint(x: size.width/2, y: size.height/2 - 40), fontSize: 30, text: "level select", name: "select"))
+        addChild(createMontserratLabel(pos: CGPoint(x: size.width/2, y: size.height/2 - 90), fontSize: 30, text: "controls", name: "controls"))
     }
     
     func drawLevelSelect() {
