@@ -16,7 +16,8 @@ class Playing: GKState {
     override func didEnter(from previousState: GKState?) {
         if previousState is WaitingForTap {
             let ball = scene.childNode(withName: BallCategoryName) as! SKSpriteNode
-            ball.physicsBody!.applyImpulse(CGVector(dx: randomDirection(), dy: randomDirection()))
+            ball.physicsBody!.pinned = false
+            ball.physicsBody!.applyImpulse(CGVector(dx: randomDirection(isNeg: false), dy: randomDirection(isNeg: false)))
         }
     }
     
@@ -30,30 +31,31 @@ class Playing: GKState {
             }
             
             let ball = scene.childNode(withName: BallCategoryName) as! SKSpriteNode
+            let xNeg = ball.physicsBody!.velocity.dx < 0
+            let yNeg = ball.physicsBody!.velocity.dy < 0
             let xSpeed = sqrt(ball.physicsBody!.velocity.dx * ball.physicsBody!.velocity.dx)
             let ySpeed = sqrt(ball.physicsBody!.velocity.dy * ball.physicsBody!.velocity.dy)
             
             //let speed = sqrt(xSpeed + ySpeed)
-            let gravityOn = scene.physicsWorld.gravity.dy < 0
             
-            if (xSpeed <= 100.0 && !gravityOn) {
-                ball.physicsBody!.applyImpulse(CGVector(dx: randomDirection(), dy: 0.0))
+            if (xSpeed <= 100.0) {
+                ball.physicsBody!.velocity = (CGVector(dx: randomDirection(isNeg: xNeg) * 40, dy: ball.physicsBody!.velocity.dy))
             }
-            if (ySpeed <= 100.0 && !gravityOn) {
-                ball.physicsBody!.applyImpulse(CGVector(dx: 0.0, dy: randomDirection()))
+            if (ySpeed <= 100.0) {
+                ball.physicsBody!.velocity = (CGVector(dx: ball.physicsBody!.velocity.dx, dy: randomDirection(isNeg: yNeg) * 40))
             }
+            //print("Speed: \(speed)")
         }
-        //print("Speed: \(speed)")
     }
     
     override func isValidNextState(_ stateClass: AnyClass) -> Bool {
         return stateClass is GameOver.Type
     }
     
-    func randomDirection() -> CGFloat {
+    func randomDirection(isNeg: Bool) -> CGFloat {
         let speedFactor: CGFloat = 2.0
         //print("Adding Impulse")
-        if (scene.randomFloat(from: 0.0, to: 100.0) >= 50) {
+        if (isNeg) {
             return -speedFactor
         }
         else {

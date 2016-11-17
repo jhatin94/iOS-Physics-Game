@@ -78,7 +78,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate, UIGestureRecognizerDelegate 
         borderBody.friction = 0
         self.physicsBody = borderBody
         
-        physicsWorld.gravity = CGVector(dx: 0.0, dy: 0.0)
+        physicsWorld.gravity = CGVector(dx: 0.0, dy: -0.1)
         physicsWorld.contactDelegate = self
         ball = childNode(withName: BallCategoryName) as! SKSpriteNode
         
@@ -108,6 +108,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate, UIGestureRecognizerDelegate 
         let trail = SKEmitterNode(fileNamed: "BallTrail")!
         trail.targetNode = trailNode
         ball.addChild(trail)
+        ball.physicsBody!.pinned = true
         
         // create launch state
         let gameMessage = SKSpriteNode(imageNamed: "TapToPlay")
@@ -311,10 +312,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate, UIGestureRecognizerDelegate 
             else if (firstBody.categoryBitMask == BallCategory && secondBody.categoryBitMask == PaddleCategory) {
                 // determine which half of paddle collided
                 if (contact.contactPoint.x > (secondBody.node?.position.x)!) { // right side contact
-                    physicsWorld.gravity = CGVector(dx: 0.0, dy: -0.2)
+                    physicsWorld.gravity = CGVector(dx: 0.0, dy: -0.5)
                 }
                 else if (contact.contactPoint.x < (secondBody.node?.position.x)!) { // left side contact
-                    physicsWorld.gravity = CGVector(dx: 0.0, dy: -1.8)
+                    physicsWorld.gravity = CGVector(dx: 0.0, dy: -2.8)
+                }
+                if (firstBody.velocity.dy < 10 && firstBody.velocity.dy > -10) {
+                    firstBody.applyImpulse(CGVector(dx: 0.0, dy: 1.6))
                 }
             }
         }
@@ -337,13 +341,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate, UIGestureRecognizerDelegate 
             if (firstBody.categoryBitMask == BallCategory && secondBody.categoryBitMask == PaddleCategory){
                 // determine which half of paddle hit
                 if (contact.contactPoint.x > (secondBody.node?.position.x)!) { // right side contact
-                    Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false, block: { _ in
-                        self.physicsWorld.gravity = CGVector(dx: 0.0, dy: 0.0)
+                    Timer.scheduledTimer(withTimeInterval: 1.0, repeats: false, block: { _ in
+                        self.physicsWorld.gravity = CGVector(dx: 0.0, dy: -0.1)
                     })
                 }
                 else if (contact.contactPoint.x < (secondBody.node?.position.x)!) { // left side contact
-                    Timer.scheduledTimer(withTimeInterval: 1.5, repeats: false, block: { _ in
-                        self.physicsWorld.gravity = CGVector(dx: 0.0, dy: 0.0)
+                    Timer.scheduledTimer(withTimeInterval: 2.5, repeats: false, block: { _ in
+                        self.physicsWorld.gravity = CGVector(dx: 0.0, dy: -0.1)
                     })
                 }
             }}
