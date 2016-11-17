@@ -202,7 +202,7 @@
 				TargetAttributes = {
 					3F82FBE61DD230CD009430AF = {
 						CreatedOnToolsVersion = 8.0;
-						DevelopmentTeam = 9Z9L4R4J82;
+						DevelopmentTeam = KT6L3A8T5R;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -372,7 +372,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 9Z9L4R4J82;
+				DEVELOPMENT_TEAM = KT6L3A8T5R;
 				INFOPLIST_FILE = bouncePuzzle/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.project2.bouncePuzzle;
@@ -386,7 +386,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 9Z9L4R4J82;
+				DEVELOPMENT_TEAM = KT6L3A8T5R;
 				INFOPLIST_FILE = bouncePuzzle/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.project2.bouncePuzzle;

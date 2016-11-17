@@ -21,24 +21,27 @@ class Playing: GKState {
     }
     
     override func update(deltaTime seconds: TimeInterval) {
+        let paused = scene.isGamePaused
         
-        scene.enumerateChildNodes(withName: TriangleCategoryName){ // automatically filters out nil
-            node, _ in
-            node.zRotation = node.zRotation - 0.05;
-        }
-        
-        let ball = scene.childNode(withName: BallCategoryName) as! SKSpriteNode
-        let xSpeed = sqrt(ball.physicsBody!.velocity.dx * ball.physicsBody!.velocity.dx)
-        let ySpeed = sqrt(ball.physicsBody!.velocity.dy * ball.physicsBody!.velocity.dy)
-        
-        //let speed = sqrt(xSpeed + ySpeed)
-        let gravityOn = scene.physicsWorld.gravity.dy < 0
-        
-        if (xSpeed <= 100.0 && !gravityOn) {
-            ball.physicsBody!.applyImpulse(CGVector(dx: randomDirection(), dy: 0.0))
-        }
-        if (ySpeed <= 100.0 && !gravityOn) {
-            ball.physicsBody!.applyImpulse(CGVector(dx: 0.0, dy: randomDirection()))
+        if (!paused) {
+            scene.enumerateChildNodes(withName: TriangleCategoryName){ // automatically filters out nil
+                node, _ in
+                node.zRotation = node.zRotation - 0.05;
+            }
+            
+            let ball = scene.childNode(withName: BallCategoryName) as! SKSpriteNode
+            let xSpeed = sqrt(ball.physicsBody!.velocity.dx * ball.physicsBody!.velocity.dx)
+            let ySpeed = sqrt(ball.physicsBody!.velocity.dy * ball.physicsBody!.velocity.dy)
+            
+            //let speed = sqrt(xSpeed + ySpeed)
+            let gravityOn = scene.physicsWorld.gravity.dy < 0
+            
+            if (xSpeed <= 100.0 && !gravityOn) {
+                ball.physicsBody!.applyImpulse(CGVector(dx: randomDirection(), dy: 0.0))
+            }
+            if (ySpeed <= 100.0 && !gravityOn) {
+                ball.physicsBody!.applyImpulse(CGVector(dx: 0.0, dy: randomDirection()))
+            }
         }
         //print("Speed: \(speed)")
     }

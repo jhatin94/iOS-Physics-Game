@@ -212,6 +212,8 @@ class MenuScene: SKScene {
         
         addChild(createMontserratLabel(pos: CGPoint(x: size.width/2, y: size.height/2 - 50), fontSize: 20, text: "The left side of the paddle makes the ball bounce lower", name: "instr3"))
         
+        addChild(createMontserratLabel(pos: CGPoint(x: size.width/2, y: size.height/2 - 100), fontSize: 20, text: "Touch the screen with two fingers to pause", name: "instr4"))
+        
         addChild(createMontserratLabel(pos: CGPoint(x: size.width/7, y: 20), fontSize: 14, text: "Return to Main Menu", name: "returnHTP"))
     }
     

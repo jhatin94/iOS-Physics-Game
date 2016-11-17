@@ -41,7 +41,7 @@ let BorderCategory: UInt32 = 0x1 << 4
 
 
 
-class GameScene: SKScene, SKPhysicsContactDelegate {
+class GameScene: SKScene, SKPhysicsContactDelegate, UIGestureRecognizerDelegate {
     var isFingerOnPaddle = false
     lazy var gameState: GKStateMachine = GKStateMachine(states: [WaitingForTap(scene: self), Playing(scene: self), GameOver(scene: self)])
     var gameWon: Bool = false {
@@ -59,6 +59,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var currentLevel: Int!
     var sceneManager: GameViewController!
     var movingParts: [SKNode] = []
+    var isGamePaused: Bool = false
+    
+    // pause labels
+    var pauseTitle = SKLabelNode(fontNamed: "Montserrat-Bold")
+    var returnToMain = SKLabelNode(fontNamed: "Montserrat-Bold")
+    var restart = SKLabelNode(fontNamed: "Montserrat-Bold")
     
     // sounds
     let blipSound = SKAction.playSoundFileNamed("ball", waitForCompletion: false)
@@ -110,6 +116,15 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         gameMessage.zPosition = 4
         gameMessage.setScale(0.05)
         addChild(gameMessage)
+        
+        initGestures() // init pause gesture
+        
+        // create pause labels
+        pauseTitle = createMontserratLabel(pos: CGPoint(x: self.frame.width/2, y: self.frame.height/2 + 80), fontSize: 30, text: "PAUSED", name: "paused")
+        
+        returnToMain = createMontserratLabel(pos: CGPoint(x: self.frame.width/2, y: self.frame.height/2 + 10), fontSize: 20, text: "Return to Menu", name: "pausedToMain")
+        
+        restart = createMontserratLabel(pos: CGPoint(x: self.frame.width/2, y: self.frame.height/2 - 50), fontSize: 20, text: "Restart Level", name: "pausedRestart")
         
         // set up moving block actions
         enumerateChildNodes(withName: "*", using: {
@@ -168,6 +183,18 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                     isFingerOnPaddle = true
                 }
             }
+            if (isGamePaused) {
+                let node = self.atPoint(touchLocation)
+                if (node.name == "pausedToMain") {
+                    togglePause()
+                    sceneManager.loadMenu(menuToLoad: MenuScene.MenuType.main)
+                }
+                else if (node.name == "pausedRestart") {
+                    togglePause()
+                    sceneManager.loadGameScene(lvl: currentLevel)
+                }
+            }
+            
             break
         case is GameOver:
             if (currentLevel >= 10 && gameWon) { // TODO: Change cap as levels increase
@@ -184,7 +211,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
-        if (isFingerOnPaddle) {
+        if (isFingerOnPaddle && !isGamePaused) {
             let touch = touches.first
             let touchLocation = touch!.location(in: self)
             let previousLocation = touch!.previousLocation(in: self)
@@ -204,12 +231,51 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     override func update(_ currentTime: TimeInterval) {
-        gameState.update(deltaTime: currentTime)
-        let complete = isGameWon()
-        if (complete && !gameLost) {
-            gameWon = true
-            gameState.enter(GameOver.self)
+        if (!isGamePaused) {
+            gameState.update(deltaTime: currentTime)
+            let complete = isGameWon()
+            if (complete && !gameLost) {
+                gameWon = true
+                gameState.enter(GameOver.self)
+                
+            }
+        }
+        else {
+            physicsWorld.speed = 0.0
+            self.view?.isPaused = true
+        }
+    }
+    
+    // create gesture functions
+    func initGestures() {
+        // setup pause two finger touch
+        let pauseTap = UITapGestureRecognizer(target: self, action: #selector(togglePause))
+        pauseTap.numberOfTapsRequired = 1
+        pauseTap.numberOfTouchesRequired = 2
+        pauseTap.delegate = self
+        view!.addGestureRecognizer(pauseTap)
+    }
+    
+    func togglePause() {
+        if (gameState.currentState! is Playing) {
+            isGamePaused = !isGamePaused
+            showHidePauseLabels(show: isGamePaused)
+        }
+    }
+    
+    func showHidePauseLabels(show: Bool) {
+        if (!show) {
+            pauseTitle.removeFromParent()
+            returnToMain.removeFromParent()
+            restart.removeFromParent()
             
+            self.view?.isPaused = false
+            physicsWorld.speed = 1.0
+        }
+        else {
+            addChild(pauseTitle)
+            addChild(returnToMain)
+            addChild(restart)
         }
     }
     
