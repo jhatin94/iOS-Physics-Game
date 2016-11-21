@@ -198,7 +198,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate, UIGestureRecognizerDelegate 
             
             break
         case is GameOver:
-            if (currentLevel >= 10 && gameWon) { // TODO: Change cap as levels increase
+            if (currentLevel >= 15 && gameWon) { // TODO: Change cap as levels increase
                 // Show Game Complete Screen
                 sceneManager.loadMenu(menuToLoad: MenuScene.MenuType.completed)
             }
